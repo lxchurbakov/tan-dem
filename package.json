@@ -1,0 +1,45 @@
+{
+  "name": "@lxch/tan-dem",
+  "version": "0.1.0",
+  "description": "The easiest way to bring collaborative work to your application.",
+  "main": "index.js",
+  "scripts": {
+    "landing:start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register landing/dist/frm/server.js",
+    "landing:dev": "npx run-p landing:server:dev landing:client:dev",
+    "landing:build": "NODE_ENV=production npx run-p landing:client:build landing:server:build",
+    "landing:server:build": "npx tsc --project landing --outDir landing/dist",
+    "landing:server:dev": "npx tsx watch -r tsconfig-paths/register landing/frm/server.tsx",
+    "landing:client:build": "npx webpack --config landing/frm/webpack.config.ts",
+    "landing:client:dev": "npx webpack --watch --config landing/frm/webpack.config.ts",
+    "server:build": "npx tsc --project server --outDir server/dist",
+    "server:start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register server/dist/index.js",
+    "server:dev": "npx ts-node -r tsconfig-paths/register server/index.ts"
+  },
+  "author": "lxch",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "express": "^4.21.1",
+    "lodash": "^4.17.23",
+    "npm-run-all": "^4.1.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-helmet": "^6.1.0",
+    "react-router-dom": "^6.28.0",
+    "style-loader": "^4.0.0",
+    "styled-components": "^6.3.11",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3",
+    "use-between": "^1.4.0",
+    "uuid": "^9.0.1",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^6.0.1",
+    "ws": "^8.19.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}
