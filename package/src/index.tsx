@@ -1,5 +1,3 @@
-import React from 'react';
-
 export { useWebsocket } from './websocket';
 
 export { TandemProvider } from './context';
