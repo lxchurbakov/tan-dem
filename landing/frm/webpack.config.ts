@@ -10,9 +10,6 @@ export default {
     resolve: {
         extensions: ['.js', '.ts', '.tsx', '.css'],
         alias: {
-            // '@': paths.src,
-            // 'lib': paths.lib,
-            // 'frm': paths.frm,
             'landing': paths.root,
             'docs': path.resolve(paths.root, '../docs'),
             'package': path.resolve(paths.root, '../package'),
@@ -28,14 +25,10 @@ export default {
             {
                 test: /\.(ico|png|jpg|jpeg|svg)/,
                 type: 'asset/resource',
-                // generator: {
-                //     filename: 'img/[name].[hash:8][ext]',
-                // },
             },
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader'],
-                // exclude: /node_modules/,
             },
         ],
     },
