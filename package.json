@@ -13,7 +13,8 @@
     "landing:client:dev": "npx webpack --watch --config landing/frm/webpack.config.ts",
     "server:build": "npx tsc --project server --outDir server/dist",
     "server:start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register server/dist/index.js",
-    "server:dev": "npx ts-node -r tsconfig-paths/register server/index.ts"
+    "server:dev": "npx ts-node -r tsconfig-paths/register server/index.ts",
+    "package:build": "npx tsc --project package --outDir package/dist"
   },
   "author": "lxch",
   "license": "ISC",
