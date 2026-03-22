@@ -1,10 +1,9 @@
 import React from 'react';
-import { useCursors } from 'package/src/index';
 
-// import { useWebsocket } from 'package/src/websocket';
-import { Absolute, Base, Clickable, Container, Flex, Text } from 'landing/lib/atoms';
-import styled from 'styled-components';
-import { debounce } from './utils';
+import { useCursors } from 'package/src/index';
+import { Absolute, Base, Card, Clickable, Container, Flex, Text } from 'landing/lib/atoms';
+
+import { debounce, Point, useName } from './utils';
 import { FancyBackground } from './fancy-background';
 
 const Cursor = () => (
@@ -21,11 +20,12 @@ const Cursor = () => (
 );
 
 export const MainPage = () => {
-    const { update, cursors } = useCursors();
+    const name = useName();
+    const { update, cursors } = useCursors<Point & { name: string }>();
    
     React.useEffect(() => {
         const mousemove = debounce(({ pageX, pageY }) => {
-            update({ x: pageX, y: pageY })
+            update({ x: pageX, y: pageY, name })
         }, 20);
 
         window.addEventListener('mousemove', mousemove);
@@ -55,9 +55,14 @@ export const MainPage = () => {
                 </Clickable> */}
             </Flex>
 
-            {Object.entries(cursors).map(([clientId, position]: any) => (
+            {Object.entries(cursors).map(([clientId, { name, ...position }]) => (
                 <Absolute key={clientId} top={position.y} left={position.x} style={{ transition: 'all .2s ease' }}>
                     <Cursor />
+
+                    <Card p="4px 6px" radius="12px" background="#447de2">
+                        <Text size="14px">{name}</Text>
+                    </Card>
+                    
                 </Absolute>
             ))}
 
