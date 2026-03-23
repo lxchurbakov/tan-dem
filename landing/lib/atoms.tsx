@@ -130,3 +130,8 @@ export const Image = styled.img<BaseProps & { border?: string, radius?: string, 
     overflow: ${props => props.hideOverflow ? 'hidden' : 'visible'};
     box-shadow: ${props => props.shadow || 'none'};
 `;
+
+//
+
+export const Heading = styled(Text).attrs({ family: 'Montserrat' })``;
+export const Paragraph = styled(Text).attrs({ family: 'Google Sans' })` letter-spacing: .25px; `;

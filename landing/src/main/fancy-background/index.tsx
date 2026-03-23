@@ -21,6 +21,6 @@ export const FancyBackground = ({ ...props }) => {
     }, []);
 
     return (
-        <img style={{ width: '100vw', height: '100vh', position: 'fixed', zIndex: -1, left: 0, top: 0 }} src="./space.svg" ref={imageRef} />
+        <img style={{ width: '100vw', height: '100vh', objectFit: 'cover', position: 'fixed', zIndex: -1, left: 0, top: 0 }} src="./space.svg" ref={imageRef} />
     );
 };

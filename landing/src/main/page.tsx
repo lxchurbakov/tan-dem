@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useCursors } from 'package/src/index';
-import { Absolute, Base, Card, Clickable, Container, Flex, Text } from 'landing/lib/atoms';
+import { Absolute, Base, Card, Clickable, Container, Flex, Heading, Paragraph, Text } from 'landing/lib/atoms';
 
 import { debounce, Point, useName } from './utils';
 import { FancyBackground } from './fancy-background';
@@ -35,15 +35,16 @@ export const MainPage = () => {
     return (
         <Container>
             <FancyBackground />
+
             <Flex mb="256px" p="24px 0" justify="flex-start" gap="36px">
-                <Text weight="800">@lxch/tandem</Text>
+                <Heading weight="800">@lxch/tandem</Heading>
 
                 {/* <Clickable>
                     <Text weight="400">article on dev.to</Text>
                 </Clickable> */}
 
                 <Clickable>
-                    <Text weight="400">docs</Text>
+                    <Paragraph weight="400">docs</Paragraph>
                 </Clickable>
 
                 {/* <Clickable>
@@ -69,20 +70,20 @@ export const MainPage = () => {
             <Base mb="256px">
                 <Text size="52px" weight="800" mb="24px">Make it work like Miro</Text>
                 
-                <Text size="32px" weight="400" mw="650px" mb="48px">
+                <Paragraph size="32px" weight="400" mw="650px" mb="48px">
                     Turn your application into powerful collaborative tool with 20 lines of code.
                     {/* {+ MIRO animated (Miro / Figma / GDocs) + gradient} */}
                     {/* + links bottom highlight */}
-                </Text>
+                </Paragraph>
 
                 <Flex justify="flex-start" gap="24px">
-                    <Clickable p="12px 18px" radius="8px" background="#a738f3">
-                        <Text weight="600" size="21px">Get started</Text>
+                    <Clickable style={{ boxShadow: '0 0 4px 0 rgba(0,0,0,.25)' }} p="14px 32px" radius="32px" background="linear-gradient(to left, #df9b2f, #f514e8)">
+                        <Paragraph weight="600" size="21px">Get started</Paragraph>
                         {/* + get started scrolls to last section */}
                     </Clickable>
 
                     <Clickable>
-                        <Text>Read an article</Text>
+                        <Paragraph size="21px">Read an article</Paragraph>
                     </Clickable>
                 </Flex>
             </Base>
