@@ -14,9 +14,8 @@ export const useCursors = <T,>() => {
 
     React.useEffect(() => {
         return on(({ id, cursor }: { id: string, cursor: T }) => {
-            // console.log('on', id, cursor)
             if (id !== self) {
-                setCursors(($) => ({ ...$, [id]: cursor }));
+                setCursors(($) => ({ ...$, [id]: { ...$[id], ...cursor } }));
             }
         });
     }, [on]);

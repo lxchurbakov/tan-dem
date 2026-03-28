@@ -54,17 +54,15 @@ export default class {
         // Dispatching messages in thread
         // (basically resending them)
         this.wss.onMessage.on(({ clientId, data }) => {
-            console.log('debug message', data)
             if (data?.type === 'thread/message') {
                 const { message, threadId } = data;
-
-                console.log('thread/message', { message, threadId });
                 
                 for (let recepientClientId of threads.list(threadId)) {
                     try {
                         this.wss.send(recepientClientId, { type: 'thread/message', threadId, clientId, message });
                     } catch (e) {
-                        //
+                        // ????
+                        console.error(`cannot send message to ${recepientClientId}`);
                     }
                 }
             }

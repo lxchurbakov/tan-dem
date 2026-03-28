@@ -19,7 +19,7 @@ export const useThread = (name: string) => {
 
     const emit = React.useCallback((data: unknown) => {
         if (ws.state === 'idle') {
-            console.log('thread/emit', data)
+            // console.log('thread/emit', data)
             ws.emit({ type: 'thread/message', threadId: name, message: data });
         }
     }, [ws]);

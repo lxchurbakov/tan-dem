@@ -4,7 +4,7 @@ import { useCursors } from 'package/src/index';
 import { Absolute, Base, Card, Clickable, Container, Flex, Heading, Paragraph, Text } from 'landing/lib/atoms';
 
 import { debounce, Point, useName } from './utils';
-import { FancyBackground } from './fancy-background';
+import { SplineBackground } from './fancy-background';
 
 const Cursor = () => (
     <svg width="40" height="30" viewBox="0 0 80 75" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,10 +19,22 @@ const Cursor = () => (
     </svg>
 );
 
+
+const Selectable = ({ name, cursors, children, ...props }) => {
+    console.log({ cursors });
+
+    // TODO render selections ???
+
+    return (
+        <span data-select={name} {...props}>{children}</span>
+    );
+};
+
 export const MainPage = () => {
     const name = useName();
-    const { update, cursors } = useCursors<Point & { name: string }>();
+    const { update, cursors } = useCursors<Partial<Point & { name: string } & { select?: { name: string, from: number, to: number } }>>();
    
+    // TODO use event listener hook
     React.useEffect(() => {
         const mousemove = debounce(({ pageX, pageY }) => {
             update({ x: pageX, y: pageY, name })
@@ -32,9 +44,30 @@ export const MainPage = () => {
         return () => window.removeEventListener('mousemove', mousemove);
     }, [update]);
 
+    React.useEffect(() => {
+        const mouseup = () => {
+            const selection = window.getSelection();
+
+            if (selection) {
+                const node = selection.anchorNode?.parentNode as HTMLElement;
+                const name = node?.getAttribute('data-select');
+
+                if (name) {
+                    const from = (selection as any).baseOffset;
+                    const to = (selection as any).extentOffset;
+
+                    update({ select: { name, from, to } });
+                }
+            }
+        };
+
+        window.addEventListener('mouseup', mouseup);
+        return () => window.removeEventListener('mouseup', mouseup);
+    }, [update]);
+
     return (
         <Container>
-            <FancyBackground />
+            <SplineBackground />
 
             <Flex mb="256px" p="24px 0" justify="flex-start" gap="36px">
                 <Heading weight="800">@lxch/tandem</Heading>
@@ -70,8 +103,8 @@ export const MainPage = () => {
             <Base mb="256px">
                 <Text size="52px" weight="800" mb="24px">Make it work like Miro</Text>
                 
-                <Paragraph size="32px" weight="400" mw="650px" mb="48px">
-                    Turn your application into powerful collaborative tool with 20 lines of code.
+                <Paragraph size="32px" weight="400" mw="650px" mb="48px" data-select="heading">
+                    <Selectable name="heading" cursors={cursors}>Turn your application into powerful collaborative tool with 20 lines of code.</Selectable>
                     {/* {+ MIRO animated (Miro / Figma / GDocs) + gradient} */}
                     {/* + links bottom highlight */}
                 </Paragraph>
